@@ -15,6 +15,7 @@ $(document).ready(function(){
       '<td>' + idNumber + '</td>' +
       '<td>' + jobTitle + '</td>' +
       '<td>' + annualSalary + '</td>' +
+      '<td><button class="deleteEmployeeButton">Delete ' + firstName +'</button></td>' +
     '</tr>'
   );
     // add monthly Salary expense to the document
@@ -23,5 +24,10 @@ $(document).ready(function(){
     var totalMonthlyExpenses = parseFloat(previousMonthlyExpenses) + newEmployeeMonthlyExpenses;
     $('#monthlyExpenses').text(totalMonthlyExpenses); //not open par means change
 
+  });
+  $('#employeeTableBody').on('click' , '.deleteEmployeeButton', function(){
+      console.log('delete button was clicked');
+      $(this).parent().parent().remove();
+      // or $(this).closest('tr').remove();
   });
 });
