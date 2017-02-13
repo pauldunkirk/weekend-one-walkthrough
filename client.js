@@ -17,5 +17,11 @@ $(document).ready(function(){
       '<td>' + annualSalary + '</td>' +
     '</tr>'
   );
+    // add monthly Salary expense to the document
+    var newEmployeeMonthlyExpenses = annualSalary/12;
+    var previousMonthlyExpenses = $('#monthlyExpenses').text(); //open par means get
+    var totalMonthlyExpenses = parseFloat(previousMonthlyExpenses) + newEmployeeMonthlyExpenses;
+    $('#monthlyExpenses').text(totalMonthlyExpenses); //not open par means change
+
   });
 });
