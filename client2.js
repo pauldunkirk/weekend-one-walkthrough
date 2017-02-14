@@ -1,7 +1,26 @@
 
 $(document).ready(function(){
-  $('#submitNewEmployee').on('click', function(){  //event listener on click of sumbitNewEmployee button
-    // declaring variables and retrieving values from input boxes
+  $('form').on('submit', function(event){  //
+    event.preventDefault(); // do not bring us to a new page - over-riding default event behavior
+
+    // serializeArray creates an array of the inputs - inputs converted to objects
+    // these objexts have two proerties: name and value -- name is not person's name, but name on input, value is value entered
+    // e.g. {name: 'firstName', value: 'Luke'}
+    console.log('form values ', $(this).serializeArray());
+
+    var submissionArray = $(this).serializeArray(); // not userful [{}, {}, {}]
+    var newEmployeeObject = {}; // we want {firstName: 'Luke', lastName: 'Schlangen'}
+
+    submissionArray.forEach(function(inputField){
+      // first time newEmployeeObject is {} empty object
+      newEmployeeObject[inputField.name] = inputField.value;
+      // same as newEmployeeObject.firstname = Luke --this is in dot notation - but use bracket because it's not going to be firstname each time
+      // newEmployeeObject is {firstname: 'Luke'}
+      // 2nd time through newEmployeeObject is {firstName: 'Luke', lastName: 'Schlangen'}
+    });
+
+    console.log(newEmployeeObject);
+
     var firstName = $('#firstName').val();
     var lastName = $('#lastName').val();
     var idNumber = $('#idNumber').val();
@@ -15,7 +34,7 @@ $(document).ready(function(){
       '<td>' + idNumber + '</td>' +
       '<td>' + jobTitle + '</td>' + //deleteEmployeeButton
       '<td>' + annualSalary + '</td>' +
-      '<td><button class=" '+a+' " data-salary=" ' + annualSalary + '  ">Delete ' + firstName +'</button></td>' +
+      '<td><button class="deleteEmployeeButton" data-salary=" ' + annualSalary + '  ">Delete ' + firstName +'</button></td>' +
     '</tr>'
   );
     // add monthly Salary expense to the document
